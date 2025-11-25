@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráficos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config={
+      darkMode:'class',
+      theme:{
+        extend:{
+          colors:{
+            primary:'#3b82f6',
+            secondary:'#8b5cf6',
+            success:'#10b981',
+            danger:'#ef4444',
+            warning:'#f59e0b',
+            dark:'#111827',
+            card:'#ffffff',
+            cardDark:'#1f2937'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full bg-gray-50 dark:bg-dark text-gray-900 dark:text-gray-100 transition-colors">
+  <div class="flex h-full">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="hidden md:flex md:flex-col w-64 bg-card dark:bg-cardDark shadow-xl">
+      <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-xl font-bold">App Logo</h2>
+      </div>
+      <nav class="flex-1 px-4 py-6 space-y-2">
+        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="graficos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white"><i class="fas fa-chart-line"></i><span>Gráficos</span></a>
+        <a href="contatos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-address-book"></i><span>Contatos</span></a>
+        <a href="atendimento.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-headset"></i><span>Atendimento</span></a>
+        <a href="cadastros_gerais.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-cog"></i><span>Cadastros Gerais</span></a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 overflow-y-auto">
+      <header class="bg-card dark:bg-cardDark shadow px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <button id="mob-menu-btn" class="md:hidden text-xl"><i class="fas fa-bars"></i></button>
+          <h1 class="text-xl font-semibold">Gráficos</h1>
+        </div>
+        <div class="flex items-center gap-3">
+          <select class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
+            <option>Últimos 30 dias</option>
+            <option>Últimos 90 dias</option>
+            <option>Último ano</option>
+          </select>
+          <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-sun"></i></button>
+        </div>
+      </header>
+
+      <section class="p-4 md:p-6 space-y-6">
+        <!-- KPIs -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-gradient-to-r from-primary to-blue-600 rounded-xl p-5 text-white shadow"><div class="flex items-center justify-between"><div><p class="text-sm opacity-90">Total Leads</p><p class="text-3xl font-bold">12.450</p></div><i class="fas fa-users text-3xl opacity-80"></i></div><p class="mt-3 text-sm">↑ 12% vs mês anterior</p></div>
+          <div class="bg-gradient-to-r from-success to-green-600 rounded-xl p-5 text-white shadow"><div class="flex items-center justify-between"><div><p class="text-sm opacity-90">Convertidos</p><p class="text-3xl font-bold">1.200</p></div><i class="fas fa-check-circle text-3xl opacity-80"></i></div><p class="mt-3 text-sm">↑ 8% taxa</p></div>
+          <div class="bg-gradient-to-r from-warning to-orange-600 rounded-xl p-5 text-white shadow"><div class="flex items-center justify-between"><div><p class="text-sm opacity-90">Em Progresso</p><p class="text-3xl font-bold">3.850</p></div><i class="fas fa-clock text-3xl opacity-80"></i></div><p class="mt-3 text-sm">↓ 3% vs mês anterior</p></div>
+          <div class="bg-gradient-to-r from-danger to-red-600 rounded-xl p-5 text-white shadow"><div class="flex items-center justify-between"><div><p class="text-sm opacity-90">Perdidos</p><p class="text-3xl font-bold">450</p></div><i class="fas fa-times-circle text-3xl opacity-80"></i></div><p class="mt-3 text-sm">↓ 15% vs mês anterior</p></div>
+        </div>
+
+        <!-- Gráfico de Linha -->
+        <div class="bg-card dark:bg-cardDark rounded-xl shadow p-6">
+          <h2 class="text-xl font-bold mb-4">Visão Geral dos Leads</h2>
+          <div class="h-80"><canvas id="leadsChart"></canvas></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-card dark:bg-cardDark rounded-xl shadow p-6"><h3 class="text-lg font-bold mb-4">Leads por Fonte</h3><div class="h-64"><canvas id="sourceChart"></canvas></div></div>
+          <div class="bg-card dark:bg-cardDark rounded-xl shadow p-6"><h3 class="text-lg font-bold mb-4">Taxa de Conversão Mensal</h3><div class="h-64"><canvas id="conversionChart"></canvas></div></div>
+        </div>
+
+        <!-- Tabela -->
+        <div class="bg-card dark:bg-cardDark rounded-xl shadow p-6"><h3 class="text-lg font-bold mb-4">Desempenho por Equipe</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm"><thead><tr class="border-b border-gray-200 dark:border-gray-700"><th class="text-left py-2 px-4 font-semibold">Equipe</th><th class="text-left py-2 px-4 font-semibold">Leads</th><th class="text-left py-2 px-4 font-semibold">Convertidos</th><th class="text-left py-2 px-4 font-semibold">Taxa (%)</th><th class="text-left py-2 px-4 font-semibold">Status</th></tr></thead>
+              <tbody><tr class="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition"><td class="py-2 px-4 flex items-center gap-3"><div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white text-xs font-bold">V</div>Vendas</td><td class="py-2 px-4">4.250</td><td class="py-2 px-4">680</td><td class="py-2 px-4">16%</td><td class="py-2 px-4"><span class="bg-success bg-opacity-10 text-success px-2 py-1 rounded-full text-xs">Excelente</span></td></tr>
+                <tr class="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition"><td class="py-2 px-4 flex items-center gap-3"><div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs font-bold">M</div>Marketing</td><td class="py-2 px-4">5.100</td><td class="py-2 px-4">408</td><td class="py-2 px-4">8%</td><td class="py-2 px-4"><span class="bg-warning bg-opacity-10 text-warning px-2 py-1 rounded-full text-xs">Bom</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mob-menu" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden">
+    <div class="w-64 h-full bg-card dark:bg-cardDark p-4">
+      <nav class="mt-6 space-y-2">
+        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-home"></i>Home</a>
+        <a href="graficos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white"><i class="fas fa-chart-line"></i>Gráficos</a>
+        <a href="contatos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-address-book"></i>Contatos</a>
+        <a href="atendimento.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-headset"></i>Atendimento</a>
+        <a href="cadastros_gerais.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-cog"></i>Cadastros Gerais</a>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    const btn=document.getElementById('theme-toggle');
+    const html=document.documentElement;
+    btn.addEventListener('click',()=>{
+      html.classList.toggle('dark');
+      btn.querySelector('i').classList.toggle('fa-moon');
+    });
+    const mobBtn=document.getElementById('mob-menu-btn');
+    const mobMenu=document.getElementById('mob-menu');
+    mobBtn.addEventListener('click',()=>mobMenu.classList.toggle('hidden'));
+    mobMenu.addEventListener('click',()=>mobMenu.classList.add('hidden'));
+
+    // Charts
+    const opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}}};
+    new Chart(document.getElementById('leadsChart'),{type:'line',data:{labels:['Jan','Fev','Mar','Abr','Mai','Jun'],datasets:[{label:'Novos Leads',data:[1200,1900,3000,5000,8000,12450],borderColor:'#3b82f6',backgroundColor:'rgba(59, 130, 246, .1)',tension:.4,fill:true},{label:'Convertidos',data:[120,200,350,500,800,1200],borderColor:'#10b981',backgroundColor:'rgba(16, 185, 129, .1)',tension:.4,fill:true}]},options:opts});
+    new Chart(document.getElementById('sourceChart'),{type:'doughnut',data:{labels:['Website','Redes Sociais','Email','Indicação','Outros'],datasets:[{data:[35,25,20,15,5],backgroundColor:['#3b82f6','#8b5cf6','#10b981','#f59e0b','#6b7280']}]},options:{...opts,plugins:{...opts.plugins,legend:{position:'bottom'}}}});
+    new Chart(document.getElementById('conversionChart'),{type:'bar',data:{labels:['Jan','Fev','Mar','Abr','Mai','Jun'],datasets:[{label:'Taxa (%)',data:[10,11,12,10,13,15],backgroundColor:'#3b82f6',borderRadius:4}]},options:{...opts,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'}}}}});
+  </script>
+</body>
+</html>

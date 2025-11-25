@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+    tailwind.config={
+      darkMode:'class',
+      theme:{
+        extend:{
+          colors:{
+            primary:'#3b82f6',
+            secondary:'#8b5cf6',
+            success:'#10b981',
+            danger:'#ef4444',
+            warning:'#f59e0b',
+            dark:'#111827',
+            card:'#ffffff',
+            cardDark:'#1f2937'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full bg-gray-50 dark:bg-dark text-gray-900 dark:text-gray-100 transition-colors">
+  <div class="flex h-full">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="hidden md:flex md:flex-col w-64 bg-card dark:bg-cardDark shadow-xl">
+      <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-xl font-bold">App Logo</h2>
+      </div>
+      <nav class="flex-1 px-4 py-6 space-y-2">
+        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="graficos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-chart-line"></i><span>Gráficos</span></a>
+        <a href="contatos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-address-book"></i><span>Contatos</span></a>
+        <a href="atendimento.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-headset"></i><span>Atendimento</span></a>
+        <a href="cadastros_gerais.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-cog"></i><span>Cadastros Gerais</span></a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 flex flex-col">
+      <!-- TopBar -->
+      <header class="bg-card dark:bg-cardDark shadow px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <button id="mob-menu-btn" class="md:hidden text-xl"><i class="fas fa-bars"></i></button>
+          <h1 class="text-xl font-semibold">Dashboard</h1>
+        </div>
+        <button id="theme-toggle" class="ml-auto p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-sun"></i></button>
+      </header>
+
+      <!-- Conteúdo -->
+      <section class="flex-1 p-4 md:p-6 grid gap-6">
+        <div class="bg-card dark:bg-cardDark rounded-xl shadow p-6">
+          <h2 class="text-2xl font-bold mb-2">Bem-vindo(a)!</h2>
+          <p class="text-gray-600 dark:text-gray-400">Visão geral e acesso rápido às principais funcionalidades.</p>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-card dark:bg-cardDark rounded-xl shadow p-5 flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Total de Leads</p>
+              <p class="text-3xl font-bold mt-1">12.450</p>
+              <span class="text-success text-sm">+12% vs mês passado</span>
+            </div>
+            <div class="text-primary text-3xl"><i class="fas fa-users"></i></div>
+          </div>
+          <div class="bg-card dark:bg-cardDark rounded-xl shadow p-5 flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Conversões</p>
+              <p class="text-3xl font-bold mt-1">1.200</p>
+              <span class="text-success text-sm">+8% taxa</span>
+            </div>
+            <div class="text-secondary text-3xl"><i class="fas fa-chart-pie"></i></div>
+          </div>
+          <div class="bg-card dark:bg-cardDark rounded-xl shadow p-5 flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Atendimentos Hoje</p>
+              <p class="text-3xl font-bold mt-1">55</p>
+              <span class="text-warning text-sm">5 pendentes</span>
+            </div>
+            <div class="text-success text-3xl"><i class="fas fa-chart-bar"></i></div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-card dark:bg-cardDark rounded-xl shadow p-6">
+          <h3 class="text-lg font-semibold mb-4">Ações Rápidas</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <a href="contatos.html#cadastrar" class="flex flex-col items-center gap-2 p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary hover:text-primary transition"><i class="fas fa-user-plus text-2xl"></i><span class="text-sm">Novo Contato</span></a>
+            <a href="atendimento.html" class="flex flex-col items-center gap-2 p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary hover:text-primary transition"><i class="fas fa-comments text-2xl"></i><span class="text-sm">Atendimento</span></a>
+            <a href="graficos.html" class="flex flex-col items-center gap-2 p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary hover:text-primary transition"><i class="fas fa-chart-line text-2xl"></i><span class="text-sm">Relatórios</span></a>
+            <a href="cadastros_gerais.html#usuarios" class="flex flex-col items-center gap-2 p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary hover:text-primary transition"><i class="fas fa-users-cog text-2xl"></i><span class="text-sm">Configurações</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mob-menu" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden">
+    <div class="w-64 h-full bg-card dark:bg-cardDark p-4">
+      <nav class="mt-6 space-y-2">
+        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white"><i class="fas fa-home"></i>Home</a>
+        <a href="graficos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-chart-line"></i>Gráficos</a>
+        <a href="contatos.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-address-book"></i>Contatos</a>
+        <a href="atendimento.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-headset"></i>Atendimento</a>
+        <a href="cadastros_gerais.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fas fa-cog"></i>Cadastros Gerais</a>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    // Dark mode
+    const btn=document.getElementById('theme-toggle');
+    const html=document.documentElement;
+    btn.addEventListener('click',()=>{
+      html.classList.toggle('dark');
+      btn.querySelector('i').classList.toggle('fa-moon');
+    });
+    // Mobile menu
+    const mobBtn=document.getElementById('mob-menu-btn');
+    const mobMenu=document.getElementById('mob-menu');
+    mobBtn.addEventListener('click',()=>mobMenu.classList.toggle('hidden'));
+    mobMenu.addEventListener('click',()=>mobMenu.classList.add('hidden'));
+  </script>
+</body>
+</html>
